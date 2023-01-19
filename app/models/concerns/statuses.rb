@@ -1,7 +1,6 @@
 class Statuses
 
-  STATUSES = statuses
-  PAYMENT_METHODS = payment_methods
+ 
   def statuses
     {
       created: 0,

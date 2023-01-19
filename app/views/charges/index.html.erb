@@ -1,2 +1,51 @@
-<h1>Charges#index</h1>
-<p>Find me in app/views/charges/index.html.erb</p>
+<div class="charges pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Charges</h1>
+
+        <%= link_to "new charge", new_charge_path, class: "btn btn-link"%>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Reference</th>
+              <th>amount</th>
+              <th>Status</th>
+              <th>Payment Method</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @charges.each do |charge| %>
+              <tr>
+                <td style="margin-left: 8px; border-left: 2px solid #dee2e6;">
+                  <%= charge.created_at %>
+                </td>
+                <td style="margin-left: 8px; border-left: 2px solid #dee2e6;">
+                  <%= charge.uid %>
+                </td>
+                <td style="margin-left: 8px; border-left: 2px solid #dee2e6;">
+                  <%= charge.amount %>
+                </td>
+                <td style="margin-left: 8px; border-left: 2px solid #dee2e6;">
+                  
+                  <% charge.status %>
+                  <% if charge.error_messages %>
+                    <small class="badge badge-danger" style="display: block;">
+                      <%= charge.error_messages %>
+                    </small>
+                  <% end %>
+                </td>
+                <td style="margin-left: 8px; border-left: 2px solid #dee2e6;"><%= charge.payment_method %></td>
+                <td>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,8 +15,8 @@
 class Charge < ApplicationRecord
   # create the class status and set the enum values, the class status will be in
   # the directory
-  enum status: Status::STATUSES
-  enum payment_method: Status::PAYMENT_METHODS
+  enum status: Statuses.new.statuses
+  enum payment_method: Statuses.new.payment_methods
 
   before_create :generate_uid
 
