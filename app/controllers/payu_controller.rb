@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
 class PayuController < Payments::PaymentProcessorRequestsController
   skip_before_action :verify_authenticity_token, only: [:confirmation]
   def result
-
     @charge = Charge.find_by(uid: params[:referenceCode])
 
     if @charge.nil?
-      @error = "Charge not found"
-      
+      @error = 'Charge not found'
+
     elsif params[:signature] != signature(@charge, params[:transactionState])
-      @error = "Invalid signature" 
+      @error = 'Invalid signature'
     end
-    if @error.nil?
-      update_status(@charge, params[:transactionState])
-      update_payment_method(@charge, params[:polPaymentMethodType])
-    end
+    return unless @error.nil?
+
+    update_status(@charge, params[:transactionState])
+    update_payment_method(@charge, params[:polPaymentMethodType])
   end
 
   def confirmation
@@ -43,26 +44,28 @@ class PayuController < Payments::PaymentProcessorRequestsController
   end
 
   def update_status(charge, status)
-    if status == "4"
+    case status
+    when '4'
       charge.paid!
-    elsif status == "7"
+    when '7'
       charge.pending!
-    elsif status == "6"
+    when '6'
       charge.rejected!
       charge.update!(error_messages: params[:response_message_pol])
     end
   end
 
   def update_payment_method(charge, payment_method)
-    if payment_method == "1"
+    case payment_method
+    when '1'
       charge.debit_card!
-    elsif payment_method == "2"
+    when '2'
       charge.credit_card!
-    elsif payment_method == "3"
+    when '3'
       charge.pse!
-    elsif payment_method == "4"
+    when '4'
       charge.cash!
-    elsif payment_method == "5"
+    when '5'
       charge.referenced!
     end
   end

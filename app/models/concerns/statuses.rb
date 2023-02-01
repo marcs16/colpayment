@@ -1,6 +1,6 @@
-class Statuses
+# frozen_string_literal: true
 
- 
+class Statuses
   def statuses
     {
       created: 0,
@@ -21,5 +21,4 @@ class Statuses
       referenced: 5
     }
   end
-
 end
