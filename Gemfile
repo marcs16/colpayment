@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 
 # gems for the project
 gem 'annotate', '~> 3.2'
+gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -73,3 +74,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "jsbundling-rails", "~> 1.1"
+
+gem "cssbundling-rails", "~> 1.1"

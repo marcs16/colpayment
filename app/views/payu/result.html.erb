@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <%= link_to "back to payments", root_path, class: "btn btn-link"%>
+      <% unless @error%>
+        <table class="table table-striped">
+          <tr>
+            <th>Reference</th>
+            <td><%= @charge.uid%></td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td><%= params["lapTransactionState"]%></td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td><%= params["processingDate"]%></td>
+          </tr>
+          <tr>
+            <th>description</th>
+            <td><%= params["description"]%></td>
+          </tr>
+          <tr>
+            <th>amount</th>
+            <td><%= @charge.amount%></td>
+          </tr>
+          <tr>
+            <th>Response</th>
+            <td><%= params["lapResponseCode"]%></td>
+          </tr>
+          <tr>
+            <th>Payment Methods</th>
+            <td><%= params["lapPaymentMethodType"]%></td>
+          </tr>
+          <tr>
+            <th>Message</th>
+            <td><%= params["message"]%></td>
+          </tr>
+        </table>
+      <% else %>
+        <div class="alert alert-danger">
+          <%= @error%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

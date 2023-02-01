@@ -67,4 +67,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # add the configuration to accept requests from ngrok domain
+  #config host from ngrok will be different everytime
+  config.hosts << ".ngrok.io"
 end
