@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: charges
@@ -20,14 +22,14 @@ class Charge < ApplicationRecord
 
   before_create :generate_uid
 
-
-  private 
+  private
 
   def generate_uid
     # generate a random string with 6 characters and validate that the uid doesn't exist in the database
     # if the uid exists, generate a new one
-    begin
+    loop do
       self.uid = SecureRandom.hex(6)
-    end while self.class.exists?(uid: uid)
+      break unless self.class.exists?(uid:)
+    end
   end
 end
